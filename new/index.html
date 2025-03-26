@@ -97,5 +97,24 @@
             }
         });
     </script>
+    <script>
+  // Vérification stricte du statut de validation du CAPTCHA
+  (function() {
+    const captchaValid = localStorage.getItem("captchaValid");
+
+    // Si le CAPTCHA n'est pas validé ou absent, rediriger immédiatement
+    if (captchaValid !== "true") {
+      // Optionnellement, afficher un message de verrouillage avant la redirection
+      document.body.innerHTML = "<h1>Accès interdit. Veuillez valider le CAPTCHA.</h1>";
+      // Rediriger après un délai pour que l'utilisateur puisse lire le message
+      setTimeout(function() {
+        window.location.href = "../";  // Redirection vers la page CAPTCHA
+      }, 3000);  // Attente de 3 secondes pour voir le message
+    } else {
+      // Si le CAPTCHA est validé, afficher le contenu strictement
+      document.getElementById("contenu").style.display = "block";
+    }
+  })();
+</script>
 </body>
 </html>
